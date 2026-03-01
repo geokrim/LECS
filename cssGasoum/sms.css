@@ -1,0 +1,79 @@
+.sms-form {
+  max-width: 1200px;
+}
+
+.sms-form .row {
+  margin-bottom: 16px;
+  align-items: flex-end;
+}
+
+.sms-form .form-group {
+  margin-bottom: 0;
+}
+
+.sms-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sms-filter-row .ckbox {
+  margin-bottom: 0;
+  min-width: 200px;
+}
+
+.sms-filter-row .form-control,
+.sms-filter-row .gasoum-selector {
+  width: auto;
+  min-width: 150px;
+}
+
+.sms-filter-row label:not(.ckbox) {
+  margin-bottom: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sms-dtpicker {
+  min-width: 140px !important;
+}
+
+.inputfield-150 {
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.sms-textarea-row {
+  margin-top: 20px;
+}
+
+.sms-textarea-row .form-control {
+  max-width: 600px;
+}
+
+.sms-char-counter {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sms-actions {
+  display: flex;
+  gap: 12px;
+  margin: 48px 0 20px 0;
+}
+
+.sms-actions .btn {
+  min-width: 160px;
+}
+
+#progress_line {
+  display: none !important;
+}
+
+#ui-datepicker-div {
+  display: none;
+}

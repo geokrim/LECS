@@ -1,0 +1,283 @@
+.modal-content {
+  background: rgba(17, 24, 39, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 18px !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 16px 20px !important;
+}
+
+.modal-header .close {
+  color: rgba(255, 255, 255, 0.72) !important;
+  text-shadow: none !important;
+  opacity: 0.8 !important;
+  font-size: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.modal-header .close:hover {
+  opacity: 1 !important;
+  color: #fff !important;
+}
+
+.modal-body {
+  padding: 20px !important;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 16px 20px !important;
+}
+
+/* Input groups in modal */
+.vafi-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.vafi-input-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.vafi-date-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.vafi-date-input i {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+}
+
+.vafi-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Table inside modal */
+#cusVafesTable {
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 8px !important;
+}
+
+#cusVafesTable th {
+  color: rgba(255, 255, 255, 0.72) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 16px 12px !important;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#cusVafesTable td {
+  color: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: none !important;
+  padding: 14px 12px !important;
+  border-radius: 0;
+}
+
+#cusVafesTable tbody tr {
+  background: transparent !important;
+}
+
+#cusVafesTable tbody tr td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+#cusVafesTable tbody tr td:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+#cusVafesTable tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Modal text colors */
+.modal-title,
+.modal-header h6,
+.modal-header h5,
+.modal-body h5 {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+/* Progress line */
+#progress_line {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #f6d32d, #ffd84a);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transition: width 0.3s ease;
+}
+
+#cusVafesTable {
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 12px !important;
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
+}
+
+#cusVafesTable th {
+  color: rgba(255, 255, 255, 0.72) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 20px 12px !important;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#cusVafesTable td {
+  color: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: none !important;
+  padding: 18px 12px !important;
+  border-radius: 0;
+}
+
+#cusVafesTable tbody tr {
+  background: transparent !important;
+}
+
+#cusVafesTable tbody tr td:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+#cusVafesTable tbody tr td:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+#cusVafesTable tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 48px auto;
+  max-width: 980px;
+  pointer-events: none;
+}
+
+.modal-lg {
+  max-width: 980px;
+}
+
+.modal-content {
+  pointer-events: auto;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  background: #000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+}
+
+.modal-backdrop.show {
+  opacity: 0.55;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.lc-table th,
+#cusHistoryTableSales th,
+#cusVafeio th {
+  padding: 16px 20px !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-transform: uppercas e !important;
+  letter-spacing: 0.5px !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.lc-table td,
+#cusHistoryTableSales td,
+#cusVafeio td {
+  padding: 14px 20px !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Row spacing for main tables */
+#cusHistoryTableSales,
+#cusVafeio {
+  border-collapse: separate !important;
+  border-spacing: 0 8px !important;
+  width: 100% !important;
+}
+
+#cusHistoryTableSales tbody tr,
+#cusVafeio tbody tr {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-radius: 10px !important;
+}
+
+#cusHistoryTableSales tbody tr td:first-child,
+#cusVafeio tbody tr td:first-child {
+  border-radius: 10px 0 0 10px !important;
+}
+
+#cusHistoryTableSales tbody tr td:last-child,
+#cusVafeio tbody tr td:last-child {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+#cusHistoryTableSales tbody tr:hover,
+#cusVafeio tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Vafeio modal backgrounds (migrated from gasoum.css) */
+#vafeioVaFiMainModal,
+#vafeio_vafi_delete_modal {
+  background-color: #81dac333;
+}

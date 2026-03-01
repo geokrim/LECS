@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <meta name="description" content="LECS. Premium Saloon Software" />
+    <meta name="author" content="LECS Softare" />
+    <title>LECS Στοιχεία Εταιρίας</title>
+    <link rel="icon" type="image/png" href="../img/lc_icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet" />
+    <link
+      href="../lib/jquery-switchbutton/jquery.switchButton.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../cssGasoum/base.css?v=3" />
+    <link rel="stylesheet" href="../cssGasoum/components.css?v=1003" />
+
+    <style>
+      .form-layout {
+        max-width: 1180px !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .content-card {
+        max-width: 1200px !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+      }
+
+      .form-control {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .form-layout .row {
+        max-width: 100% !important;
+      }
+    </style>
+
+    <script
+      type="text/javascript"
+      src="../jsGasoum/randomizer.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/menu_admin.js?ver=591"
+    ></script>
+    <script type="text/javascript" src="../creds/servers.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/gasoum.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/misc.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/login.js?ver=591"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/time_out.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/company.js?ver=591"
+    ></script>
+  </head>
+  <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fa fa-navicon"></i>
+    </div>
+
+    <div class="br-logo">
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa fa-angle-left"></i>
+      </div>
+      <a href=""><span>[</span>LECS<span>]</span></a>
+    </div>
+    <div class="br-sideleft">
+      <div class="br-sideleft-top">
+        <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
+      </div>
+
+      <div class="br-sideleft-scroll">
+        <div class="br-sideleft-menu" id="lc_menu"></div>
+      </div>
+
+      <div class="br-sideleft-bottom">
+        <div class="lc-installation-info" id="lc_installation_info">
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΕΓΚΑΤΑΣΤΑΣΗ</span>
+            <span class="lc-installation-value" id="lc_installation_name">
+              2199 [L] - DEV LS2
+            </span>
+          </div>
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΗΜΕΡ. ΛΗΞΗΣ ΣΥΜΒΑΣΗΣ</span>
+            <span class="lc-installation-value" id="lc_installation_expire">
+              27/07/2026
+            </span>
+          </div>
+        </div>
+
+        <div class="lc-userbar" id="lc_userbar">
+          <div
+            class="lc-userbar__avatar"
+            id="lc_user_avatar"
+            aria-hidden="true"
+          >
+            <i class="fa fa-user"></i>
+            <span class="lc-userbar__status" aria-hidden="true"></span>
+          </div>
+          <div class="lc-userbar__name" id="lc_user_name"></div>
+        </div>
+      </div>
+    </div>
+    <div class="br-mainpanel act_tab_new_mainpanel">
+      <main class="br-pagebody">
+        <h1 class="page-title page-title--inbody">Στοιχεία Εταιρίας</h1>
+        <div class="content-card">
+          <div class="form-layout form-layout-2">
+            <div class="row no-gutters">
+              <div class="col-md-12">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Id <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_id"
+                    disabled="true"
+                  />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Εταιρικός Κωδικός <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_global_id"
+                    disabled="true"
+                  />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Επωνυμία <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_eponymia"
+                  />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Τίτλος <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_titlos" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Διεύθυνση <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_address"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Χώρα <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_country"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >ΑΦΜ <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_afm" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >ΔΟΥ <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_doy" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Όνομα Υπευθ. Α <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_ypeuthinos1"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Σταθερό τηλ. Α <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_tel1" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Κινητό τηλ. Α <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_mobile1"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Όνομα Υπευθ. Β <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_ypeuthinos2"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Σταθερό τηλ. Β <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_tel2" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Κινητό τηλ. Β <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_mobile2"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Βασικό Email <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_email1" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Δεύτερο Email <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_email2" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Timeout (seconds) <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_timeout_seconds"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Σελίδα (url) <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_url" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Facebook <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_facebook"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Προτιμώμενο φύλο πελάτη:
+                    <span class="tx-danger">*</span></label
+                  >
+                  <div class="col-md-12" id="sexModeOption">
+                    <div style="display: flex; gap: 16px; margin-top: 8px">
+                      <label
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 8px;
+                          cursor: pointer;
+                        "
+                      >
+                        <input
+                          type="radio"
+                          id="cus_is_female"
+                          name="cusSex"
+                          value="F"
+                          onclick="clickCusSexFemale()"
+                        />
+                        <span>Γυναίκα</span>
+                      </label>
+                      <label
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 8px;
+                          cursor: pointer;
+                        "
+                      >
+                        <input
+                          type="radio"
+                          id="cus_is_male"
+                          name="cusSex"
+                          value="M"
+                          onclick="clickCusSexMale()"
+                        />
+                        <span>Άνδρας</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Υπόλοιπο οφειλής σε ευρώ:
+                    <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_ypoloipo"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Υπόλοιπο διαθέσιμων SMS:
+                    <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_smsYpoloipo"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Ενεργά SMS <span class="tx-danger">*</span></label
+                  >
+                  <div class="col-md-12" id="smsActiveOption">
+                    <div style="margin-top: 8px">
+                      <label
+                        style="
+                          display: flex;
+                          align-items: center;
+                          gap: 8px;
+                          cursor: pointer;
+                        "
+                      >
+                        <input type="checkbox" id="company_has_sms" />
+                        <span>SMS Ενεργά</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Ημερο/νία λήξης συνδρομής:
+                    <span class="tx-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company_expDate"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Static IP Εγκατάστασης:
+                    <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_ip" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mg-md-l--1">
+                  <label class="form-control-label"
+                    >Πλάνο: <span class="tx-danger">*</span></label
+                  >
+                  <input type="text" class="form-control" id="company_plan" />
+                </div>
+              </div>
+            </div>
+            <div class="form-layout-footer">
+              <div class="actions">
+                <button
+                  class="btn btn-primary"
+                  id="company_update"
+                  onclick="updateCompanyById()"
+                >
+                  Αποθήκευση
+                </button>
+                <button
+                  class="btn btn-danger"
+                  id="company_ip_update"
+                  onclick="updateCompanyIpById()"
+                >
+                  Ενημέρωση IP
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="br-footer">
+        <div class="footer-left">
+          <div class="mg-b-2">Copyright &copy; 2017. Bracket Plus.</div>
+          <div>All Rights Reserved.</div>
+        </div>
+        <div class="footer-right d-flex align-items-center">
+          <span class="tx-uppercase mg-r-10">Share:</span>
+          <a target="_blank" class="pd-x-5" href="https://www.facebook.com/"
+            ><i class="fa fa-facebook-official"></i
+          ></a>
+          <a target="_blank" class="pd-x-5" href="https://twitter.com/"
+            ><i class="fa fa-twitter"></i
+          ></a>
+        </div>
+      </footer>
+    </div>
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/jquery-ui/jquery-ui.js"></script>
+    <script src="../lib/moment/moment.js"></script>
+    <script src="../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+
+    <script>
+      credsAppOtherCheck();
+      if (typeof menu_constructor === "function") {
+        menu_constructor();
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+        const body = document.body;
+
+        if (menuToggle) {
+            menuToggle.addEventListener("click", function () {
+                body.classList.toggle("collapsed-menu");
+            });
+        }
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener("click", function (e) {
+                e.stopPropagation();
+                body.classList.add("show-sidebar");
+            });
+        }
+
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener("click", function () {
+                body.classList.remove("show-sidebar");
+            });
+        }
+
+        document.addEventListener("click", function (e) {
+            var link = e.target.closest(".br-menu-link");
+            if (!link) return;
+            var sub = link.nextElementSibling;
+            if (sub && sub.classList && sub.classList.contains("br-menu-sub")) {
+                e.preventDefault();
+                link.classList.toggle("show-sub");
+                return;
+            }
+            if (window.innerWidth < 981) {
+                body.classList.remove("show-sidebar");
+            }
+        });
+    });
+
+    (function () {
+        try {
+            var raw = localStorage.getItem("lcObj");
+            if (!raw) return;
+            var u = JSON.parse(raw);
+            var name = (u && (u.name || u.username) ? String(u.name || u.username) : "").trim();
+            var surname = (u && u.surname ? String(u.surname) : "").trim();
+            var full = (name + (surname ? " " + surname : "")).trim();
+            if (!full) return;
+            var el = document.getElementById("lc_user_name");
+            if (el) el.textContent = full;
+        } catch (e) {
+            console.error("Error loading user bar:", e);
+        }
+    })();
+
+    try {
+        var companyEl = document.getElementById("lcCompany");
+        var settingsMenu = document.getElementById("lcSettingsMenu");
+        
+        if (companyEl) companyEl.classList.add("active");
+        if (settingsMenu) {
+            settingsMenu.classList.add("active");
+            settingsMenu.classList.add("show-sub");
+        }
+    } catch (e) {
+        console.warn("Menu state error:", e);
+    }
+
+    if (window.jQuery) {
+        jQuery(function () {
+            if (typeof showCompanyById === "function") {
+                showCompanyById();
+            }
+        });
+    }
+    </script>
+  </body>
+</html>

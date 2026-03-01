@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LECS Ημερολόγιο</title>
+    <link rel="icon" type="image/png" href="../img/lc_icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet" />
+    <link href="../lib/datatables/jquery.dataTables.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../cssGasoum/base.css?v=3" />
+    <link rel="stylesheet" href="../cssGasoum/components.css?v=1003" />
+    <link rel="stylesheet" href="../cssGasoum/people.css?v=1003" />
+
+    <script
+      type="text/javascript"
+      src="../jsGasoum/randomizer.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/menu_admin.js?ver=591"
+    ></script>
+    <script type="text/javascript" src="../creds/servers.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/gasoum.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/misc.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/login.js?ver=591"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/time_out.js?ver=591"
+    ></script>
+
+    <style>
+      .calendar-view {
+        display: none;
+      }
+      .calendar-view.active {
+        display: block;
+      }
+      .day-header {
+        text-align: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        font-weight: bold;
+        background: rgba(255, 255, 255, 0.06);
+        color: rgba(255, 255, 255, 0.92);
+      }
+      .today {
+        background: rgba(246, 211, 45, 0.15) !important;
+      }
+
+      #month-view .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        margin-top: 15px;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      #month-view .calendar-day {
+        min-height: 100px;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 5px;
+        font-size: 0.9rem;
+        background: rgba(11, 15, 20, 0.4);
+        color: rgba(255, 255, 255, 0.88);
+      }
+      #month-view .calendar-day:nth-child(7n) {
+        border-right: none;
+      }
+      #month-view .day-number {
+        font-weight: bold;
+        float: right;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .time-grid {
+        display: grid;
+        grid-template-columns: 50px repeat(7, 1fr);
+        row-gap: 0;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      #day-view .time-grid {
+        grid-template-columns: 50px 1fr;
+      }
+      .time-label {
+        grid-column: 1 / 2;
+        padding: 2px 5px;
+        text-align: right;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+        color: rgba(255, 255, 255, 0.56);
+        transform: translateY(-50%);
+        position: sticky;
+        left: 0;
+        background: rgba(11, 15, 20, 0.78);
+        z-index: 10;
+        font-size: 0.8rem;
+      }
+      .time-slot {
+        height: 50px;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        position: relative;
+        background: rgba(11, 15, 20, 0.3);
+      }
+      .time-grid > .time-slot:nth-child(even) {
+        border-left: none;
+      }
+
+      #day-view .time-slot {
+        grid-column: 2 / 3;
+        border-left: none;
+      }
+
+      .calendar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+      }
+
+      .calendar-nav h5 {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.92);
+        font-weight: 700;
+      }
+
+      .calendar-nav button {
+        background: rgba(30, 41, 59, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.92);
+        padding: 8px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 140ms ease;
+      }
+
+      .calendar-nav button:hover {
+        background: rgba(30, 41, 59, 1);
+        border-color: rgba(255, 255, 255, 0.28);
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 8px;
+      }
+
+      .view-toggle label {
+        margin: 0;
+        padding: 8px 16px;
+        background: rgba(30, 41, 59, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        color: rgba(255, 255, 255, 0.78);
+        cursor: pointer;
+        transition: all 140ms ease;
+      }
+
+      .view-toggle input:checked + label {
+        background: linear-gradient(
+          135deg,
+          rgba(246, 211, 45, 0.95),
+          rgba(255, 216, 74, 0.92)
+        );
+        color: #0b0f14;
+        border-color: rgba(246, 211, 45, 0.9);
+      }
+
+      .view-toggle input {
+        display: none;
+      }
+
+      .event-item {
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.85),
+          rgba(6, 182, 212, 0.85)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.95);
+        cursor: move;
+        transition: transform 140ms ease;
+      }
+
+      .event-item:hover {
+        transform: translateY(-1px);
+      }
+
+      .modal-content {
+        background: rgba(11, 15, 20, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 18px;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .modal-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .modal-footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .btn-close {
+        filter: invert(1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fa fa-navicon"></i>
+    </div>
+
+    <div class="br-logo">
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa fa-angle-left"></i>
+      </div>
+      <a href=""><span>[</span>LECS<span>]</span></a>
+    </div>
+
+    <div class="br-sideleft">
+      <div class="br-sideleft-top">
+        <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
+      </div>
+
+      <div class="br-sideleft-scroll">
+        <div class="br-sideleft-menu" id="lc_menu"></div>
+      </div>
+
+      <div class="br-sideleft-bottom">
+        <div class="lc-installation-info" id="lc_installation_info">
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΕΓΚΑΤΑΣΤΑΣΗ</span>
+            <span class="lc-installation-value" id="lc_installation_name">
+              2199 [L] - DEV LS2
+            </span>
+          </div>
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΗΜΕΡ. ΛΗΞΗΣ ΣΥΜΒΑΣΗΣ</span>
+            <span class="lc-installation-value" id="lc_installation_expire">
+              27/07/2026
+            </span>
+          </div>
+        </div>
+
+        <div class="lc-userbar" id="lc_userbar">
+          <div
+            class="lc-userbar__avatar"
+            id="lc_user_avatar"
+            aria-hidden="true"
+          >
+            <i class="fa fa-user"></i>
+            <span class="lc-userbar__status" aria-hidden="true"></span>
+          </div>
+          <div class="lc-userbar__name" id="lc_user_name"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="br-mainpanel act_tab_new_mainpanel">
+      <main class="br-pagebody">
+        <h1 class="page-title page-title--inbody">Ημερολόγιο</h1>
+
+        <div class="content-card">
+          <div class="content-card__body">
+            <div class="calendar-nav">
+              <div class="d-flex align-items-center">
+                <button id="prevBtn">←</button>
+                <h5 class="mb-0 mx-3" id="currentMonthYear">Loading...</h5>
+                <button id="nextBtn">→</button>
+              </div>
+
+              <div class="view-toggle">
+                <input
+                  type="radio"
+                  name="btnradio"
+                  id="viewDay"
+                  data-view="day"
+                />
+                <label for="viewDay">Ημέρα</label>
+
+                <input
+                  type="radio"
+                  name="btnradio"
+                  id="viewWeek"
+                  data-view="week"
+                />
+                <label for="viewWeek">Εβδομάδα</label>
+
+                <input
+                  type="radio"
+                  name="btnradio"
+                  id="viewMonth"
+                  checked
+                  data-view="month"
+                />
+                <label for="viewMonth">Μήνας</label>
+              </div>
+
+              <button class="btn btn-primary">+ Νέο</button>
+            </div>
+
+            <div id="month-view" class="calendar-view active">
+              <div class="calendar-grid">
+                <div class="day-header">Δευτέρα</div>
+                <div class="day-header">Τρίτη</div>
+                <div class="day-header">Τετάρτη</div>
+                <div class="day-header">Πέμπτη</div>
+                <div class="day-header">Παρασκευή</div>
+                <div class="day-header text-danger">Σάββατο</div>
+                <div class="day-header text-danger">Κυριακή</div>
+              </div>
+              <div id="calendar-body-month" class="calendar-grid"></div>
+            </div>
+
+            <div id="week-view" class="calendar-view">
+              <div class="time-grid">
+                <div class="day-header" style="grid-column: 1 / 2"></div>
+                <div class="day-header">Δευτ</div>
+                <div class="day-header">Τριτ</div>
+                <div class="day-header">Τετ</div>
+                <div class="day-header">Πεμ</div>
+                <div class="day-header">Παρ</div>
+                <div class="day-header">Σαβ</div>
+                <div class="day-header text-danger">Κυρ</div>
+              </div>
+              <div id="calendar-body-week" class="time-grid"></div>
+            </div>
+
+            <div id="day-view" class="calendar-view">
+              <div class="time-grid" id="day-header-day">
+                <div class="day-header" style="grid-column: 1 / 2"></div>
+              </div>
+              <div id="calendar-body-day" class="time-grid"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="eventModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Event Details / Creation</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-dismiss="modal"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  This is a placeholder pop-up. (Double-click or Create button
+                  clicked)
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Exit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="br-footer">
+        <div class="footer-left">
+          <div class="mg-b-2">Copyright &copy; 2017. Bracket Plus.</div>
+          <div>All Rights Reserved.</div>
+        </div>
+        <div class="footer-right d-flex align-items-center">
+          <span class="tx-uppercase mg-r-10">Share:</span>
+          <a target="_blank" class="pd-x-5" href="https://www.facebook.com/"><i class="fa fa-facebook-official"></i></a>
+          <a target="_blank" class="pd-x-5" href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/popper.js/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+
+    <script>
+      credsAppOtherCheck();
+
+      if (typeof menu_constructor === "function") menu_constructor();
+
+      document.addEventListener("click", function (e) {
+        var link = e.target.closest(".br-menu-link");
+        if (!link) return;
+
+        var sub = link.nextElementSibling;
+        if (sub && sub.classList && sub.classList.contains("br-menu-sub")) {
+          e.preventDefault();
+          link.classList.toggle("show-sub");
+          return;
+        }
+      });
+
+      (function () {
+        try {
+          var raw = localStorage.getItem("lcObj");
+          if (!raw) return;
+          var u = JSON.parse(raw);
+          var name = (
+            u && (u.name || u.username) ? String(u.name || u.username) : ""
+          ).trim();
+          var surname = (u && u.surname ? String(u.surname) : "").trim();
+          var full = (name + (surname ? " " + surname : "")).trim();
+          if (!full) return;
+          var el = document.getElementById("lc_user_name");
+          if (el) el.textContent = full;
+        } catch (e) {}
+      })();
+
+      try {
+        document.getElementById("lcMenuMain").classList.add("active");
+      } catch (e) {}
+
+      const monthBody = document.getElementById("calendar-body-month");
+      const weekBody = document.getElementById("calendar-body-week");
+      const dayBody = document.getElementById("calendar-body-day");
+      const dayHeaderEl = document.getElementById("day-header-day");
+      const currentMonthYearEl = document.getElementById("currentMonthYear");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const viewButtons = document.querySelectorAll('.view-toggle input[data-view]');
+      const views = document.querySelectorAll(".calendar-view");
+      const createBtn = document.querySelector('.btn-primary');
+
+      const eventModalElement = document.getElementById("eventModal");
+      const eventModal = new bootstrap.Modal(eventModalElement);
+
+      let currentDate = new Date();
+      let currentView = "month";
+      let draggedEventId = null;
+
+      function getStartOfWeek(date) {
+        const day = date.getDay();
+        const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+        return new Date(date.setDate(diff));
+      }
+
+      if (createBtn) {
+        createBtn.addEventListener("click", () => {
+          eventModal.show();
+        });
+      }
+
+      function addEventDoubleClickListener() {
+        const events = document.querySelectorAll(".event-item");
+        events.forEach((event) => {
+          event.addEventListener("dblclick", (e) => {
+            e.stopPropagation();
+            eventModal.show();
+          });
+        });
+      }
+
+      function addDragAndDropListeners() {
+        const events = document.querySelectorAll(".event-item");
+        const timeSlots = document.querySelectorAll(".time-slot");
+
+        events.forEach((event) => {
+          event.addEventListener("dragstart", (e) => {
+            draggedEventId = e.target.id;
+            e.dataTransfer.setData("text/plain", draggedEventId);
+            setTimeout(() => e.target.classList.add("d-none"), 0);
+          });
+
+          event.addEventListener("dragend", (e) => {
+            e.target.classList.remove("d-none");
+          });
+        });
+
+        timeSlots.forEach((slot) => {
+          slot.addEventListener("dragenter", (e) => {
+            e.preventDefault();
+            e.currentTarget.classList.add("bg-success", "bg-opacity-10");
+          });
+
+          slot.addEventListener("dragover", (e) => {
+            e.preventDefault();
+          });
+
+          slot.addEventListener("dragleave", (e) => {
+            e.currentTarget.classList.remove("bg-success", "bg-opacity-10");
+          });
+
+          slot.addEventListener("drop", (e) => {
+            e.preventDefault();
+            e.currentTarget.classList.remove("bg-success", "bg-opacity-10");
+
+            const droppedEventId = e.dataTransfer.getData("text/plain");
+            const draggedEvent = document.getElementById(droppedEventId);
+
+            if (draggedEvent) {
+              const originalParent = draggedEvent.parentElement;
+              e.currentTarget.appendChild(draggedEvent);
+
+              if (originalParent && originalParent.children.length === 0) {
+                originalParent.innerHTML = "";
+              }
+            }
+          });
+        });
+
+        addEventDoubleClickListener();
+      }
+
+      function setView(view) {
+        currentView = view;
+        views.forEach((v) => v.classList.remove("active"));
+        document.getElementById(`${view}-view`).classList.add("active");
+        renderCalendar();
+      }
+
+      viewButtons.forEach((btn) => {
+        btn.addEventListener("change", () => {
+          setView(btn.dataset.view);
+        });
+      });
+
+      function navigate(direction) {
+        if (currentView === "month") {
+          currentDate.setMonth(currentDate.getMonth() + direction);
+        } else if (currentView === "week") {
+          currentDate.setDate(currentDate.getDate() + 7 * direction);
+        } else if (currentView === "day") {
+          currentDate.setDate(currentDate.getDate() + direction);
+        }
+        renderCalendar();
+      }
+
+      prevBtn.addEventListener("click", () => navigate(-1));
+      nextBtn.addEventListener("click", () => navigate(1));
+
+      function renderCalendar() {
+        if (currentView === "month") {
+          renderMonthView();
+        } else if (currentView === "week") {
+          renderWeekView();
+        } else if (currentView === "day") {
+          renderDayView();
+        }
+      }
+
+      function renderMonthView() {
+        monthBody.innerHTML = "";
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const today = new Date();
+
+        const monthName = currentDate.toLocaleString("default", {
+          month: "long",
+        });
+        currentMonthYearEl.textContent = `${monthName} ${year}`;
+
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const startDayIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < startDayIndex; i++) {
+          const emptyCell = document.createElement("div");
+          emptyCell.className = "calendar-day";
+          emptyCell.style.background = "rgba(11, 15, 20, 0.2)";
+          monthBody.appendChild(emptyCell);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dayCell = document.createElement("div");
+          dayCell.className = "calendar-day";
+          const isToday =
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear();
+          if (isToday) dayCell.classList.add("today");
+
+          dayCell.innerHTML = `<span class="day-number">${day}</span>`;
+
+          if (day === 10)
+            dayCell.innerHTML +=
+              '<p class="small text-primary m-0">Event</p>';
+
+          monthBody.appendChild(dayCell);
+        }
+      }
+
+      function renderWeekView() {
+        weekBody.innerHTML = "";
+        const startOfWeek = getStartOfWeek(new Date(currentDate));
+        const year = startOfWeek.getFullYear();
+        const today = new Date();
+
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 6);
+        const startMonth = startOfWeek.toLocaleString("default", {
+          month: "short",
+        });
+        const endMonth = endOfWeek.toLocaleString("default", {
+          month: "short",
+        });
+        currentMonthYearEl.textContent = `${startMonth} ${startOfWeek.getDate()} - ${endMonth} ${endOfWeek.getDate()}, ${year}`;
+
+        for (let hour = 0; hour < 24; hour++) {
+          const timeLabel = document.createElement("div");
+          timeLabel.className = "time-label";
+          timeLabel.textContent = `${hour.toString().padStart(2, "0")}:00`;
+          weekBody.appendChild(timeLabel);
+
+          for (let day = 0; day < 7; day++) {
+            const daySlot = document.createElement("div");
+            daySlot.className = "time-slot";
+
+            const slotDate = new Date(startOfWeek);
+            slotDate.setDate(startOfWeek.getDate() + day);
+
+            if (slotDate.toDateString() === today.toDateString()) {
+              daySlot.classList.add("today");
+            }
+
+            if (day === 1 && hour === 10) {
+              daySlot.innerHTML = `<div id="event-week-101" draggable="true" class="event-item" style="height: 100%;">
+                    Daily Sync
+                </div>`;
+            }
+
+            weekBody.appendChild(daySlot);
+          }
+        }
+        addDragAndDropListeners();
+      }
+
+      function renderDayView() {
+        dayBody.innerHTML = "";
+        dayHeaderEl.innerHTML =
+          '<div class="day-header" style="grid-column: 1 / 2;"></div>';
+        const year = currentDate.getFullYear();
+
+        const dayName = currentDate.toLocaleString("default", {
+          weekday: "long",
+        });
+        const monthName = currentDate.toLocaleString("default", {
+          month: "long",
+        });
+        currentMonthYearEl.textContent = `${dayName}, ${monthName} ${currentDate.getDate()}, ${year}`;
+
+        const dayHead = document.createElement("div");
+        dayHead.className = "day-header";
+        dayHead.textContent = dayName;
+        dayHeaderEl.appendChild(dayHead);
+
+        for (let hour = 0; hour < 24; hour++) {
+          const timeLabel = document.createElement("div");
+          timeLabel.className = "time-label";
+          timeLabel.textContent = `${hour.toString().padStart(2, "0")}:00`;
+          dayBody.appendChild(timeLabel);
+
+          const daySlot = document.createElement("div");
+          daySlot.className = "time-slot";
+
+          if (hour === 9) {
+            daySlot.innerHTML = `<div id="event-day-102" draggable="true" class="event-item" style="height: 100%;">
+                Presentation Prep
+            </div>`;
+          }
+
+          dayBody.appendChild(daySlot);
+        }
+        addDragAndDropListeners();
+      }
+
+      setView("week");
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+        const body = document.body;
+
+        if (menuToggle) {
+          menuToggle.addEventListener("click", function () {
+            body.classList.toggle("collapsed-menu");
+          });
+        }
+
+        if (mobileMenuToggle) {
+          mobileMenuToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            body.classList.add("show-sidebar");
+          });
+        }
+
+        if (sidebarOverlay) {
+          sidebarOverlay.addEventListener("click", function () {
+            body.classList.remove("show-sidebar");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

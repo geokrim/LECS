@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+
+    <meta name="description" content="LECS. Premium Saloon Software" />
+    <meta name="author" content="LECS Softare" />
+
+    <title>LECS Βαφείο</title>
+    <link rel="icon" type="image/png" href="../img/lc_icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet" />
+    <link href="../lib/datatables/jquery.dataTables.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../cssGasoum/base.css?v=3" />
+    <link rel="stylesheet" href="../cssGasoum/components.css?v=1003" />
+    <link rel="stylesheet" href="../cssGasoum/people.css?v=1003" />
+    <link rel="stylesheet" href="../cssGasoum/cus.css?v=1" />
+
+    <!-- jQuery UI Autocomplete Styling -->
+    <style>
+      .ui-autocomplete {
+        background: rgba(17, 24, 39, 0.98) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 9999 !important;
+      }
+      .ui-autocomplete .ui-menu-item {
+        padding: 0;
+      }
+      .ui-autocomplete .ui-menu-item-wrapper {
+        padding: 12px 16px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 0;
+      }
+      .ui-autocomplete .ui-menu-item:first-child .ui-menu-item-wrapper {
+        border-radius: 12px 12px 0 0;
+      }
+      .ui-autocomplete .ui-menu-item:last-child .ui-menu-item-wrapper {
+        border-radius: 0 0 12px 12px;
+      }
+      .ui-autocomplete .ui-state-active,
+      .ui-autocomplete .ui-state-focus {
+        background: rgba(246, 211, 45, 0.2) !important;
+        border: none !important;
+        color: #fff !important;
+      }
+
+      /* Empty table styling */
+      #cusVafeio,
+      #cusHistoryTableSales {
+        position: relative;
+      }
+
+      #cusVafeio tbody:empty,
+      #cusHistoryTableSales tbody:empty {
+        display: table-row-group !important;
+        height: 150px;
+      }
+
+      #cusVafeio tbody:empty::before,
+      #cusHistoryTableSales tbody:empty::before {
+        content: "Δεν υπάρχουν εγγραφές για αυτόν τον πελάτη";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 14px;
+        font-style: italic;
+        white-space: nowrap;
+      }
+
+      /* Align tables and form inputs */
+      .content-card {
+        max-width: 1100px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .table-shell {
+        width: 100% !important;
+        overflow-x: auto;
+      }
+
+      #cusVafeio,
+      #cusHistoryTableSales {
+        width: 100% !important;
+        margin: 0 !important;
+      }
+
+      /* Form layout consistency */
+      .form-layout {
+        width: 100% !important;
+        max-width: none !important;
+      }
+
+      /* Input field consistency */
+      .form-group input[type="text"],
+      .form-group textarea {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Remove fixed widths from cols */
+      .col-sm-3,
+      .col-sm-9 {
+        max-width: none !important;
+        flex: 1 1 auto !important;
+      }
+
+      .col-sm-3 {
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+      }
+
+      .col-sm-9 {
+        flex: 0 0 75% !important;
+        max-width: 75% !important;
+      }
+
+      /* Customer select input styling */
+      #select_cus {
+        width: 380px !important;
+        height: 52px !important;
+        padding: 12px 16px !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        background: rgba(17, 24, 39, 0.85) !important;
+        border: 2px solid rgba(246, 211, 45, 0.35) !important;
+        border-radius: 14px !important;
+        box-shadow:
+          0 10px 28px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+        transition: all 0.2s ease !important;
+      }
+
+      #select_cus::placeholder {
+        color: rgba(255, 255, 255, 0.45) !important;
+      }
+
+      #select_cus:hover {
+        border-color: rgba(246, 211, 45, 0.55) !important;
+        background: rgba(17, 24, 39, 0.95) !important;
+      }
+
+      #select_cus:focus {
+        outline: none !important;
+        border-color: rgba(246, 211, 45, 0.85) !important;
+        box-shadow:
+          0 0 0 4px rgba(246, 211, 45, 0.15),
+          0 14px 36px rgba(0, 0, 0, 0.55) !important;
+        background: rgba(17, 24, 39, 1) !important;
+      }
+    </style>
+
+    <script
+      type="text/javascript"
+      src="../jsGasoum/randomizer.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/menu_admin.js?ver=591"
+    ></script>
+
+    <script type="text/javascript" src="../creds/servers.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/gasoum.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/misc.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/login.js?ver=591"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/time_out.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/spinner.js?ver=591"
+    ></script>
+    <script type="text/javascript" src="../jsGasoum/cus.js?ver=591"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/cusHistory.js?ver=591"
+    ></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sifter/0.5.3/sifter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microplugin/0.0.3/microplugin.min.js"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/selectize.js?ver=591"
+    ></script>
+    <script type="text/javascript" src="../jsGasoum/vafeio.js?ver=591"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/validation.js?ver=591"
+    ></script>
+  </head>
+
+  <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fa fa-navicon"></i>
+    </div>
+
+    <div class="br-logo">
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa fa-angle-left"></i>
+      </div>
+      <a href=""><span>[</span>LECS<span>]</span></a>
+    </div>
+
+    <div class="br-sideleft">
+      <div class="br-sideleft-top">
+        <span class="sidebar-label pd-x-15 mg-t-20">Navigation</span>
+      </div>
+
+      <div class="br-sideleft-scroll">
+        <div class="br-sideleft-menu" id="lc_menu"></div>
+      </div>
+
+      <div class="br-sideleft-bottom">
+        <div class="lc-installation-info" id="lc_installation_info">
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΕΓΚΑΤΑΣΤΑΣΗ</span>
+            <span class="lc-installation-value" id="lc_installation_name">
+              2199 [L] - DEV LS2
+            </span>
+          </div>
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΗΜΕΡ. ΛΗΞΗΣ ΣΥΜΒΑΣΗΣ</span>
+            <span class="lc-installation-value" id="lc_installation_expire">
+              27/07/2026
+            </span>
+          </div>
+        </div>
+
+        <div class="lc-userbar" id="lc_userbar">
+          <div
+            class="lc-userbar__avatar"
+            id="lc_user_avatar"
+            aria-hidden="true"
+          >
+            <i class="fa fa-user"></i>
+            <span class="lc-userbar__status" aria-hidden="true"></span>
+          </div>
+          <div class="lc-userbar__name" id="lc_user_name"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="br-mainpanel act_tab_new_mainpanel">
+      <main class="br-pagebody">
+        <h1 class="page-title page-title--inbody">Βαφείο</h1>
+
+        <!-- Customer Selection -->
+        <div class="content-card" style="margin-bottom: 20px">
+          <div class="content-card__body">
+            <div class="form-layout">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group" style="margin-bottom: 0">
+                    <label for="select_cus" style="margin-right: 10px"
+                      >Πελάτης:</label
+                    >
+                    <input
+                      id="select_cus"
+                      onchange="getCusId()"
+                      style="width: 340px; display: inline-block"
+                      placeholder="Επιλέξτε Πελάτη & πατήστε Enter"
+                    />
+                    <button
+                      id="btn_cus_details"
+                      type="button"
+                      class="btn btn-primary"
+                      data-toggle="collapse"
+                      data-target="#multiCollapseExample1"
+                      style="margin-left: 10px"
+                    >
+                      Στοιχεία Πελάτη
+                    </button>
+                    <button
+                      id="btn_cus_history"
+                      type="button"
+                      class="btn"
+                      data-toggle="collapse"
+                      data-target="#multiCollapseExample3"
+                      style="margin-left: 10px"
+                    >
+                      Ιστορικό
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Details Collapse -->
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+          <div class="content-card" style="margin-bottom: 20px">
+            <div class="content-card__body">
+              <div class="form-layout">
+                <div class="row" style="display: none">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_id">ID:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cus_id"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_name">Όνομα:</label>
+                      <input type="text" class="form-control" id="cus_name" />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_surname">Επώνυμο:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cus_surname"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="ckbox ckbox-success"
+                        ><input type="checkbox" id="cus_active" /><span
+                          >Ενεργός</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="dob_datepicker">Γεννέθλια:</label>
+                      <input
+                        type="text"
+                        class="form-control fc-datepicker"
+                        id="dob_datepicker"
+                        placeholder="DD/MM/YYYY"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="ckbox ckbox-indigo"
+                        ><input
+                          type="checkbox"
+                          id="cus_is_female"
+                          value="F"
+                          onclick="clickCusSexFemale()"
+                        /><span>ΓΥΝΑΙΚΑ</span></label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="ckbox ckbox-primary"
+                        ><input
+                          type="checkbox"
+                          id="cus_is_male"
+                          value="M"
+                          onclick="clickCusSexMale()"
+                        /><span>ΑΝΔΡΑΣ</span></label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="ckbox ckbox-success"
+                        ><input
+                          type="checkbox"
+                          id="cus_gdpr"
+                          onclick="clickCusGdpr()"
+                        /><span>GDPR</span></label
+                      >
+                      <input
+                        type="text"
+                        class="form-control fc-datepicker"
+                        id="cus_gdpr_datepicker"
+                        placeholder="DD/MM/YYYY"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_mobile">Κινητό:</label>
+                      <input type="text" class="form-control" id="cus_mobile" />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_phone">Σταθερό:</label>
+                      <input type="text" class="form-control" id="cus_phone" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_email">Email:</label>
+                      <input type="text" class="form-control" id="cus_email" />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_address">Διεύθυνση:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cus_address"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_disc_service">Έκπτωση Υπηρ/ών:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cus_disc_service"
+                        style="direction: rtl"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_disc_stock">Έκπτωση Προιόντα:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cus_disc_stock"
+                        style="direction: rtl"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="cus_days_from_last">Ημ. τελ. Επισ/ψη:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="cus_days_from_last"
+                        style="direction: rtl"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="cus_comments">Σχόλια:</label>
+                      <textarea
+                        rows="3"
+                        class="form-control"
+                        placeholder="Σχόλια"
+                        id="cus_comments"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-layout-footer">
+                  <button
+                    class="btn btn-primary"
+                    id="cus_update"
+                    onclick="execUpdateCusByIdFromCus(3)"
+                  >
+                    Αποθήκευση
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- History Collapse -->
+        <div class="collapse multi-collapse" id="multiCollapseExample3">
+          <div class="content-card" style="margin-bottom: 20px">
+            <div class="content-card__body">
+              <div class="table-shell">
+                <table
+                  id="cusHistoryTableSales"
+                  class="lc-table display responsive nowrap stripe"
+                >
+                  <thead>
+                    <tr>
+                      <th>Ημερ/νία</th>
+                      <th>Τύπος</th>
+                      <th>Περιγραφή</th>
+                      <th>Συνεργάτης</th>
+                      <th>Αξία</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- New Dye Entry -->
+        <div class="content-card" style="margin-bottom: 20px">
+          <div class="content-card__body">
+            <div class="form-layout">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="dt_datepicker">Ημερ/νία:</label>
+                    <input
+                      type="text"
+                      class="form-control fc-datepicker"
+                      id="dt_datepicker"
+                      placeholder="DD/MM/YYYY"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <div class="form-group">
+                    <label for="vafeio_cus_vafi">Βαφή:</label>
+                    <textarea
+                      id="vafeio_cus_vafi"
+                      name="vafeio_cus_vafi"
+                      rows="3"
+                      class="form-control"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-layout-footer">
+                <button
+                  class="btn btn-primary"
+                  id="last_cus_vafi"
+                  onclick="vafeioLastVafiByCusIdForSales()"
+                >
+                  Αντιγραφή Τελευταίας Βαφής
+                </button>
+                <button
+                  id="vafeio_save"
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="new_vafi_save()"
+                >
+                  Αποθήκευση
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dyes Table -->
+        <div class="content-card">
+          <div class="content-card__body">
+            <div class="table-shell">
+              <table
+                id="cusVafeio"
+                class="lc-table display responsive nowrap stripe"
+              >
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Ημερ/νία</th>
+                    <th>Βαφή</th>
+                    <th>Μεταβολή</th>
+                    <th>Διαγραφή</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="vafeioVaFiMainModal" class="modal fade">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6
+                  style="
+                    margin: 0;
+                    font-size: 14px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, 0.92);
+                  "
+                >
+                  ΒΑΦΕΙΟ
+                </h6>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div id="vafeio_vafi_update_group">
+                  <input
+                    type="hidden"
+                    id="vafeio_vafi_update_id"
+                    name="vafeio_vafi_update_id"
+                  />
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control fc-datepicker"
+                      id="vafeio_vafi_update_datepicker"
+                      placeholder="DD/MM/YYYY"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <textarea
+                      id="vafeio_vafi_update_descr"
+                      name="vafeio_vafi_update_descr"
+                      rows="3"
+                      class="form-control"
+                    ></textarea>
+                  </div>
+                  <div class="vafi-buttons">
+                    <button
+                      onclick="vafeioVafiUpdate()"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      Αποθήκευση
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">
+                  Κλείσιμο
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Modal -->
+        <div class="modal fade" id="vafeio_vafi_delete_modal">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6
+                  id="vafeio_delete_error_message"
+                  style="
+                    margin: 0;
+                    font-size: 14px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, 0.92);
+                  "
+                >
+                  ΕΠΙΒΕΒΑΙΩΣΗ ΔΙΑΓΡΑΦΗΣ
+                </h6>
+              </div>
+              <div class="modal-body">
+                <h5 id="vafeio_vafi_delete_id" hidden></h5>
+                <h5
+                  id="vafeio_vafi_delete_descr"
+                  style="
+                    margin: 0;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: rgba(255, 255, 255, 0.92);
+                  "
+                ></h5>
+              </div>
+              <div class="modal-footer">
+                <button
+                  id="btn_cus_delete"
+                  onclick="vafeio_vafi_delete()"
+                  data-dismiss="modal"
+                  type="button"
+                  class="btn btn-danger"
+                >
+                  Διαγραφή
+                </button>
+                <button type="button" class="btn" data-dismiss="modal">
+                  Ακύρωση
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="br-footer">
+        <div class="footer-left">
+          <div class="mg-b-2">Copyright &copy; 2017. Bracket Plus.</div>
+          <div>All Rights Reserved.</div>
+        </div>
+        <div class="footer-right d-flex align-items-center">
+          <span class="tx-uppercase mg-r-10">Share:</span>
+          <a target="_blank" class="pd-x-5" href="https://www.facebook.com/"><i class="fa fa-facebook-official"></i></a>
+          <a target="_blank" class="pd-x-5" href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+        </div>
+      </footer>
+    </div>
+
+    <div id="progress_line" style="visibility: hidden"></div>
+
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"
+    />
+    <script src="../lib/popper.js/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <script src="../lib/jquery-ui/jquery-ui.js"></script>
+
+    <script src="../lib/datatables/jquery.dataTables.js"></script>
+    <script src="../lib/datatables-responsive/dataTables.responsive.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+
+    <script>
+      credsAppOtherCheck();
+
+      if (typeof menu_constructor === "function") menu_constructor();
+
+      document.addEventListener("click", function (e) {
+        var link = e.target.closest(".br-menu-link");
+        if (!link) return;
+
+        var sub = link.nextElementSibling;
+        if (sub && sub.classList && sub.classList.contains("br-menu-sub")) {
+          e.preventDefault();
+          link.classList.toggle("show-sub");
+          return;
+        }
+      });
+
+      (function () {
+        try {
+          var raw = localStorage.getItem("lcObj");
+          if (!raw) return;
+          var u = JSON.parse(raw);
+          var name = (
+            u && (u.name || u.username) ? String(u.name || u.username) : ""
+          ).trim();
+          var surname = (u && u.surname ? String(u.surname) : "").trim();
+          var full = (name + (surname ? " " + surname : "")).trim();
+          if (!full) return;
+          var el = document.getElementById("lc_user_name");
+          if (el) el.textContent = full;
+        } catch (e) {}
+      })();
+
+      try {
+        document.getElementById("lcCusMenu").classList.add("active");
+        document.getElementById("lcCusMenu").classList.add("show-sub");
+        document.getElementById("lcVafeio").classList.add("active");
+      } catch (e) {}
+
+      if (typeof seeCusDetails !== "undefined" && seeCusDetails == 0) {
+        document.getElementById("btn_cus_details").style.visibility = "hidden";
+      }
+      if (typeof seeCusHistory !== "undefined" && seeCusHistory == 0) {
+        document.getElementById("btn_cus_history").style.visibility = "hidden";
+      }
+
+      $(".fc-datepicker").datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "dd/mm/yy",
+      });
+
+      // Initialize the page
+      var availableCustomers = [];
+      add_cus_to_selection();
+      initializeDates();
+      initialize_fields();
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+        const body = document.body;
+
+        if (menuToggle) {
+          menuToggle.addEventListener("click", function () {
+            body.classList.toggle("collapsed-menu");
+          });
+        }
+
+        if (mobileMenuToggle) {
+          mobileMenuToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            body.classList.add("show-sidebar");
+          });
+        }
+
+        if (sidebarOverlay) {
+          sidebarOverlay.addEventListener("click", function () {
+            body.classList.remove("show-sidebar");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

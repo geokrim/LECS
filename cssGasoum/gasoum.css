@@ -1,0 +1,183 @@
+/* ------------------------------ GENERAL ------------------------------ */
+/* ALL DATEPICKER */
+/*.fc-datepicker, */
+.table-condensed {
+  width: 150px;
+  height: 35px;
+  font-size: x-small;
+}
+
+.fc-datepicker {
+  width: 70px;
+  height: 20px;
+  font-size: x-small;
+  text-align: center;
+}
+/* DATEPICKER ICON */
+.ion-calendar {
+  height: 8px;
+  width: 8px;
+}
+/* ALL SEELECTORS */
+.gasoum-selector {
+  width: 250px;
+  height: 35px;
+  font-size: x-small;
+}
+
+.gasoum-selector-time {
+  width: 70px;
+  height: 35px;
+  font-size: x-small;
+}
+/* ALL BUTTONS */
+.btn {
+  height: 35px;
+  /* vertical-align: middle; */
+  padding: 0.15rem 0.15rem;
+  margin-top: 0.15rem;
+  margin-bottom: 0.15rem;
+  margin-left: 0.15rem;
+  margin-right: 0.15rem;
+}
+
+/* ------------------------------ SALES_NEW ------------------------------ */
+/* HIDE COLUMNS */
+#salesTableServices tr > *:nth-child(1),
+#salesTableServices tr > *:nth-child(3),
+#salesTableServices tr > *:nth-child(6) {
+  display: none;
+}
+/* EDITABLE COLUMNS */
+#salesTableServices tr > *:nth-child(2),
+#salesTableServices tr > *:nth-child(4) {
+  contenteditable: "true";
+}
+
+/* HIDE COLUMNS */
+#salesTableStock tr > *:nth-child(1),
+#salesTableStock tr > *:nth-child(3) {
+  display: none;
+}
+/* EDITABLE COLUMNS */
+#salesTableStock tr > *:nth-child(2),
+#salesTableStock tr > *:nth-child(4) {
+  contenteditable: "true";
+}
+
+#sale_eisp_metr {
+  background-color: lightblue;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  outline: none;
+}
+
+#sale_eisp_karta {
+  background-color: tomato;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  outline: none;
+}
+
+.inputfield {
+  height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-inline: 1px;
+}
+
+.inputfield-red {
+  height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-inline: 1px;
+  color: #ffffff;
+  background-color: #f7200d;
+}
+
+#select_service {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-inline: 1px;
+}
+
+#select_user_service {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-inline: 1px;
+}
+
+#select_stock {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-inline: 1px;
+}
+
+#select_user_stock {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  height: 28px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-inline: 1px;
+}
+
+/* ------------------------------ CUSTOMERS_VAFEIO ------------------------------ */
+
+/* HIDE COLUMNS does't work*/
+/*
+#cusVafeio tr > *:nth-child(1) {
+  display: none;
+}
+*/
+#vafeioVaFiMainModal,
+#vafeio_vafi_delete_modal {
+  background-color: #81dac333;
+}
+/* doesn't look good but it works 
+.modal-content {
+  background-color: #81dac333;
+  opacity: 0.15;
+}
+  */

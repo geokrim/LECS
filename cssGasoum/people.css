@@ -1,0 +1,555 @@
+.content-card {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.content-card__header {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.content-card__body {
+  margin: 0;
+  padding: 0;
+}
+
+.btn.btn-primary {
+  background: linear-gradient(
+    135deg,
+    rgba(246, 211, 45, 0.95),
+    rgba(255, 216, 74, 0.92)
+  ) !important;
+  color: rgba(11, 15, 20, 0.95) !important;
+  border: 1px solid rgba(246, 211, 45, 0.9) !important;
+  border-radius: 14px !important;
+  padding: 13px 22px !important;
+  height: 48px !important;
+  font-weight: 900 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.4px !important;
+  text-transform: uppercase !important;
+  box-shadow:
+    0 10px 28px rgba(246, 211, 45, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    filter 140ms ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn.btn-primary:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 216, 74, 1),
+    rgba(246, 211, 45, 1)
+  ) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 14px 36px rgba(246, 211, 45, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  filter: brightness(1.05) !important;
+}
+
+.btn.btn-primary:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 6px 18px rgba(246, 211, 45, 0.3) !important;
+}
+
+.table-shell,
+.table-wrapper {
+  background: rgba(11, 15, 20, 0.68) !important;
+  backdrop-filter: blur(18px) !important;
+  border-radius: 18px !important;
+  padding: 24px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  position: relative !important;
+}
+
+.table-shell::before,
+.table-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(246, 211, 45, 0.45),
+    transparent
+  );
+}
+
+table.dataTable {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  background: transparent !important;
+  font-size: 13px !important;
+}
+
+table.dataTable thead {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+table.dataTable thead th {
+  padding: 14px 10px !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-weight: 800 !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  border-bottom: none !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+
+table.dataTable tbody tr {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  transition:
+    background 150ms ease,
+    transform 120ms ease !important;
+}
+
+table.dataTable tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  transform: translateX(2px) !important;
+}
+
+table.dataTable tbody tr:last-child {
+  border-bottom: none !important;
+}
+
+table.dataTable tbody td {
+  padding: 14px 10px !important;
+  border: none !important;
+  vertical-align: middle !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+table.dataTable tbody td:last-child {
+  border-right: none !important;
+}
+
+table.dataTable tbody tr td:first-child {
+  position: relative;
+}
+
+table.dataTable tbody tr td:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 150ms ease;
+}
+
+table.dataTable tbody tr:hover td:first-child::before {
+  background: linear-gradient(
+    180deg,
+    rgba(246, 211, 45, 0.85),
+    rgba(255, 216, 74, 0.65)
+  );
+}
+
+table.dataTable tbody td a {
+  color: rgba(255, 255, 255, 0.92) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: color 150ms ease !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+table.dataTable tbody td a:hover {
+  color: rgba(246, 211, 45, 0.95) !important;
+  border-bottom-color: rgba(246, 211, 45, 0.6) !important;
+  text-decoration: none !important;
+}
+
+table.dataTable tbody td i {
+  font-size: 15px !important;
+  font-weight: bold !important;
+}
+
+table.dataTable tbody td .fa-check {
+  color: #6ee7b7 !important;
+}
+
+table.dataTable tbody td .fa-minus {
+  color: rgba(148, 163, 184, 0.6) !important;
+}
+
+table.dataTable tbody td .fa-trash {
+  color: #fca5a5 !important;
+  cursor: pointer !important;
+  transition:
+    transform 150ms ease,
+    color 150ms ease !important;
+}
+
+table.dataTable tbody td .fa-trash:hover {
+  color: #fecaca !important;
+  transform: scale(1.15) !important;
+}
+
+.dataTables_wrapper {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.dataTables_length,
+.dataTables_filter,
+.dataTables_info,
+.dataTables_paginate {
+  margin-top: 18px !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.dataTables_length label,
+.dataTables_filter label {
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.3px !important;
+}
+
+.dataTables_filter {
+  float: right !important;
+}
+
+.dataTables_filter input {
+  background: rgba(0, 0, 0, 0.28) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  padding: 10px 16px !important;
+  margin-left: 10px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: all 150ms ease !important;
+  backdrop-filter: blur(8px) !important;
+  min-width: 200px !important;
+}
+
+.dataTables_filter input::placeholder {
+  color: rgba(255, 255, 255, 0.38) !important;
+}
+
+.dataTables_filter input:focus {
+  outline: none !important;
+  background: rgba(0, 0, 0, 0.38) !important;
+  border-color: rgba(246, 211, 45, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(246, 211, 45, 0.1) !important;
+}
+
+.dataTables_paginate {
+  margin-top: 20px !important;
+  text-align: right !important;
+}
+
+.dataTables_paginate .paginate_button {
+  background: rgba(30, 41, 59, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 12px !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  margin: 0 3px !important;
+  padding: 9px 14px !important;
+  min-width: 40px !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  transition: all 140ms ease !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.dataTables_paginate .paginate_button:hover {
+  background: rgba(51, 65, 85, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.24) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  transform: translateY(-1px) !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+  background: rgba(71, 85, 105, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  color: rgba(255, 255, 255, 0.98) !important;
+  font-weight: 900 !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dataTables_paginate .paginate_button.disabled {
+  opacity: 0.25 !important;
+  cursor: not-allowed !important;
+}
+
+.dt-buttons {
+  margin-bottom: 18px !important;
+  display: flex !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+
+.dt-buttons .btn {
+  background: rgba(51, 65, 85, 0.65) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  padding: 10px 16px !important;
+  height: auto !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.3px !important;
+  transition: all 140ms ease !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  text-transform: uppercase !important;
+}
+
+.dt-buttons .btn:hover {
+  background: rgba(71, 85, 105, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  color: rgba(255, 255, 255, 1) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.dt-buttons .btn:active {
+  transform: translateY(0) !important;
+}
+
+.dataTables_info {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.58) !important;
+  padding-top: 18px !important;
+}
+
+.dataTables_length {
+  float: left !important;
+}
+
+.dataTables_length select {
+  background: rgba(30, 41, 59, 0.55) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  padding: 8px 12px !important;
+  margin: 0 8px !important;
+  font-size: 13px !important;
+  backdrop-filter: blur(8px) !important;
+  transition: all 140ms ease !important;
+}
+
+.dataTables_length select:focus {
+  outline: none !important;
+  background: rgba(30, 41, 59, 0.75) !important;
+  border-color: rgba(246, 211, 45, 0.4) !important;
+  box-shadow: 0 0 0 3px rgba(246, 211, 45, 0.08) !important;
+}
+
+#people_delete_modal {
+  z-index: 2000 !important;
+}
+
+#people_delete_modal .modal-dialog {
+  max-width: 560px !important;
+  margin: 12vh auto 0 auto !important;
+  transform: translateY(8px) scale(0.98) !important;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease !important;
+}
+
+#people_delete_modal.modal.fade .modal-dialog {
+  transform: translateY(12px) scale(0.98) !important;
+  opacity: 0 !important;
+}
+
+#people_delete_modal.modal.show .modal-dialog {
+  transform: translateY(0) scale(1) !important;
+  opacity: 1 !important;
+}
+
+#people_delete_modal .modal-content {
+  background: rgba(11, 15, 20, 0.82) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(16px) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  overflow: hidden !important;
+}
+
+#people_delete_modal .modal-header {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 18px 20px 12px 20px !important;
+}
+
+#people_delete_modal .modal-header::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(246, 211, 45, 0.95),
+    rgba(255, 216, 74, 0.35),
+    transparent
+  );
+}
+
+#people_delete_modal .modal-body {
+  background: transparent !important;
+  padding: 12px 20px 16px 20px !important;
+}
+
+#people_delete_modal .modal-footer {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 16px 20px 18px 20px !important;
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: flex-end !important;
+}
+
+#people_delete_modal #people_delete_error_message {
+  font-weight: 900 !important;
+  letter-spacing: 0.3px !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+#people_delete_modal #people_details {
+  font-size: 14px !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+#people_delete_modal .btn {
+  height: 44px !important;
+  padding: 0 18px !important;
+  border-radius: 14px !important;
+}
+
+#people_delete_modal .btn-danger {
+  background: linear-gradient(
+    135deg,
+    rgba(246, 211, 45, 0.95),
+    rgba(255, 216, 74, 0.92)
+  ) !important;
+  color: #0b0f14 !important;
+  border: 1px solid rgba(246, 211, 45, 0.9) !important;
+}
+
+#people_delete_modal .btn-secondary {
+  background: rgba(30, 41, 59, 0.85) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+#people_delete_modal ~ .modal-backdrop {
+  background: rgba(0, 0, 0, 0.75) !important;
+  opacity: 1 !important;
+}
+
+.dt-buttons .dt-button,
+.dt-buttons a.dt-button,
+.dt-buttons button.dt-button {
+  background: rgba(51, 65, 85, 0.65) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  padding: 10px 16px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.3px !important;
+  text-transform: uppercase !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  transition: all 140ms ease !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  text-decoration: none !important;
+}
+
+.dt-buttons .dt-button:hover,
+.dt-buttons a.dt-button:hover,
+.dt-buttons button.dt-button:hover {
+  background: rgba(71, 85, 105, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  color: rgba(255, 255, 255, 1) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+.dt-buttons .dt-button:active,
+.dt-buttons a.dt-button:active,
+.dt-buttons button.dt-button:active {
+  transform: translateY(0) !important;
+}
+
+#peopleGroupChartDiv {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  margin: 24px 0 !important;
+  box-shadow:
+    0 18px 45px rgba(2, 6, 23, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+#peopleGroupChart {
+  max-height: 400px !important;
+}

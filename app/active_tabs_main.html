@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+
+    <meta name="description" content="LECS. Premium Saloon Software" />
+    <meta name="author" content="LECS Softare" />
+
+    <title>LECS Επεξεργασία Καρτέλας</title>
+    <link rel="icon" type="image/png" href="../img/lc_icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet" />
+    <link
+      href="../lib/jquery-switchbutton/jquery.switchButton.css"
+      rel="stylesheet"
+    />
+    <link href="../lib/datatables/jquery.dataTables.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../cssGasoum/base.css?v=3" />
+    <link rel="stylesheet" href="../cssGasoum/components.css?v=1003" />
+    <link rel="stylesheet" href="../cssGasoum/people.css?v=1003" />
+    <link rel="stylesheet" href="../cssGasoum/active_tabs.css?v=1003" />
+  </head>
+
+  <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fa fa-navicon"></i>
+    </div>
+
+    <div class="br-logo">
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fa fa-angle-left"></i>
+      </div>
+      <a href=""><span>[</span>LECS<span>]</span></a>
+    </div>
+
+    <div class="br-sideleft">
+      <div class="br-sideleft-top">
+        <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
+      </div>
+
+      <div class="br-sideleft-scroll">
+        <div class="br-sideleft-menu" id="lc_menu"></div>
+      </div>
+
+      <div class="br-sideleft-bottom">
+        <div class="lc-installation-info" id="lc_installation_info">
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΕΓΚΑΤΑΣΤΑΣΗ</span>
+            <span class="lc-installation-value" id="lc_installation_name">
+              2199 [L] - DEV LS2
+            </span>
+          </div>
+          <div class="lc-installation-row">
+            <span class="lc-installation-label">ΗΜΕΡ. ΛΗΞΗΣ ΣΥΜΒΑΣΗΣ</span>
+            <span class="lc-installation-value" id="lc_installation_expire">
+              27/07/2026
+            </span>
+          </div>
+        </div>
+
+        <div class="lc-userbar" id="lc_userbar">
+          <div
+            class="lc-userbar__avatar"
+            id="lc_user_avatar"
+            aria-hidden="true"
+          >
+            <i class="fa fa-user"></i>
+            <span class="lc-userbar__status" aria-hidden="true"></span>
+          </div>
+          <div class="lc-userbar__name" id="lc_user_name"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="br-mainpanel act_tab_new_mainpanel">
+      <main class="br-pagebody">
+        <h1 class="page-title page-title--inbody">Μεταβολή Καρτέλας</h1>
+
+        <div class="content-card">
+          <div class="content-card__body">
+            <div class="form-layout act_tab_main_vasika_stoixeia">
+              <h3>Βασικά στοιχεία</h3>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12">
+                    <label for="dt_datepicker">Ημερ/νία:</label>
+                    <input
+                      type="text"
+                      class="fc-datepicker form-control"
+                      id="dt_datepicker"
+                      placeholder="DD/MM/YYYY"
+                    />
+                    <label for="select_tm" class="mg-l-10"
+                      >Ώρα προσέλευσης:</label
+                    >
+                    <select
+                      id="select_tm"
+                      onchange="get_current_time()"
+                      class="gasoum-selector-time form-control ora"
+                    >
+                      <option value="0">Επιλογή ώρας...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-12">
+                    <label for="select_cus">Πελάτης:</label>
+                    <input
+                      id="select_cus"
+                      onchange="getCusId()"
+                      class="form-control"
+                      type="text"
+                      disabled
+                    />
+                    <button
+                      id="btn_cus_details"
+                      class="btn btn-primary mg-l-10"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#multiCollapseExample1"
+                      aria-expanded="false"
+                      aria-controls="multiCollapseExample2"
+                    >
+                      Στοιχεία Πελάτη
+                    </button>
+                    <button
+                      id="btn_cus_history"
+                      class="btn btn-primary mg-l-10"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#multiCollapseExample3"
+                      aria-expanded="false"
+                      aria-controls="multiCollapseExample2"
+                    >
+                      Ιστορικό
+                    </button>
+                    <button
+                      id="btn_cus_vafes"
+                      class="btn btn-primary mg-l-10"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#multiCollapseExample2"
+                      aria-expanded="false"
+                      aria-controls="multiCollapseExample2"
+                    >
+                      Προηγούμενες Βαφές
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="collapse multi-collapse"
+                    id="multiCollapseExample1"
+                  >
+                    <div class="card card-body">
+                      <div class="form-layout">
+                        <div class="row">
+                          <div class="col-sm-2 invisible">
+                            <label for="cus_id">ID:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_id"
+                              name="cus_id"
+                              class="form-control"
+                              disabled
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_name">Όνομα:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_name"
+                              name="cus_name"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_surname">Επώνυμο:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_surname"
+                              name="cus_surname"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label class="ckbox ckbox-success">
+                              <input type="checkbox" id="cus_active" />
+                              <span>Ενεργός</span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label>Γεννέθλια:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              class="fc-datepicker form-control"
+                              id="dob_datepicker"
+                              placeholder="DD/MM/YYYY"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label class="ckbox ckbox-indigo">
+                              <input
+                                type="checkbox"
+                                id="cus_is_female"
+                                value="F"
+                                onclick="clickCusSexFemale()"
+                              />
+                              <span>ΓΥΝΑΙΚΑ</span>
+                            </label>
+                          </div>
+                          <div class="col-sm-4">
+                            <label class="ckbox ckbox-primary">
+                              <input
+                                type="checkbox"
+                                id="cus_is_male"
+                                value="M"
+                                onclick="clickCusSexMale()"
+                              />
+                              <span>ΑΝΔΡΑΣ</span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label class="ckbox ckbox-success">
+                              <input
+                                type="checkbox"
+                                id="cus_gdpr"
+                                onclick="clickCusGdpr()"
+                              />
+                              <span>GDPR</span>
+                            </label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              class="fc-datepicker form-control"
+                              id="cus_gdpr_datepicker"
+                              placeholder="DD/MM/YYYY"
+                              disabled
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_mobile">Κινητό:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_mobile"
+                              name="cus_mobile"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_phone">Σταθερό:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_phone"
+                              name="cus_phone"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_email">Email:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_email"
+                              name="cus_email"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_address">Διεύθυνση:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_address"
+                              name="cus_address"
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_disc_service"
+                              >Έκπτωση Υπηρ/ών:</label
+                            >
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_disc_service"
+                              name="cus_disc_service"
+                              class="form-control text-right"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_disc_stock"
+                              >Έκπτωση Προιόντα:</label
+                            >
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_disc_stock"
+                              name="cus_disc_stock"
+                              class="form-control text-right"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_days_from_last"
+                              >Ημ. τελ. Επισ/ψη:</label
+                            >
+                          </div>
+                          <div class="col-sm-4">
+                            <input
+                              type="text"
+                              id="cus_days_from_last"
+                              name="cus_days_from_last"
+                              class="form-control text-right"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <label for="cus_comments">Σχόλια:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <textarea
+                              rows="3"
+                              class="form-control"
+                              placeholder="Σχόλια"
+                              id="cus_comments"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-4">
+                            <button
+                              class="btn btn-primary"
+                              id="cus_update"
+                              onclick="execUpdateCusByIdFromCus(2)"
+                              ondblclick="execUpdateCusByIdFromCus(2)"
+                            >
+                              Αποθήκευση
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="collapse multi-collapse"
+                    id="multiCollapseExample2"
+                  >
+                    <div class="card card-body">
+                      <div class="table-shell">
+                        <table
+                          id="cusVafesTableSales"
+                          class="lc-table display responsive nowrap stripe"
+                        >
+                          <thead>
+                            <tr>
+                              <th>Ημερ/νία</th>
+                              <th>Βαφή</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div
+                    class="collapse multi-collapse"
+                    id="multiCollapseExample3"
+                  >
+                    <div class="card card-body">
+                      <div class="table-shell">
+                        <table
+                          id="cusHistoryTableSales"
+                          class="lc-table display responsive nowrap stripe"
+                        >
+                          <thead>
+                            <tr>
+                              <th>Ημερ/νία</th>
+                              <th>Τύπος</th>
+                              <th>Περιγραφή</th>
+                              <th>Συνεργάτης</th>
+                              <th>Αξία</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mg-t-20">
+                <div class="col-sm-3">
+                  <label for="sale_cus_vafi">Νέα βαφή:</label>
+                  <button
+                    class="btn btn-primary"
+                    id="last_cus_vafi"
+                    onclick="cuslLastVafiByCusIdForSales()"
+                  >
+                    Αντιγραφή Τελευταίας
+                  </button>
+                </div>
+                <div class="col-sm-4">
+                  <textarea
+                    id="sale_cus_vafi"
+                    name="sale_cus_vafi"
+                    rows="3"
+                    class="form-control"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-layout mg-t-30 act_tab_main_services">
+              <h3>Υπηρεσίες</h3>
+              <div class="row">
+                <div class="col-12">
+                  <label for="select_service">Υπηρεσία:</label>
+                  <select
+                    id="select_service"
+                    onchange="getServiceDetatilsById(this)"
+                    class="gasoum-selector form-control"
+                  >
+                    <option value="0">Επιλογή Υπηρεσίας...</option>
+                  </select>
+                  <label for="select_user_service" class="mg-l-10"
+                    >Συνεργάτης:</label
+                  >
+                  <select
+                    id="select_user_service"
+                    onchange="getUserForService(this)"
+                    class="gasoum-selector form-control"
+                  >
+                    <option value="0">Επιλογή Συνεργάτη...</option>
+                  </select>
+                  <label for="sale_service_axia" class="mg-l-10">Αξία</label>
+                  <input
+                    type="text"
+                    id="sale_service_axia"
+                    name="sale_service_axia"
+                    onchange="change_sale_service_axia()"
+                    class="form-control"
+                  />
+                  <span id="sale_service_requires_vafi">R</span>
+                  <button
+                    class="btn btn-primary mg-l-10"
+                    id="sale_service_add"
+                    onclick="
+                      validate_number_service_sales('sale_service_axia');
+                      sale_service_add_to_table();
+                      recalc_sale_service_total();
+                      sales_update_analysis();
+                    "
+                  >
+                    Προσθήκη Υπηρεσίας
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-shell mg-t-20">
+                <table
+                  id="salesTableServices"
+                  class="lc-table display responsive nowrap stripe"
+                >
+                  <thead>
+                    <tr>
+                      <th>Service id</th>
+                      <th>Υπηρεσία</th>
+                      <th>Συνεργάτης id</th>
+                      <th>Συνεργάτης</th>
+                      <th>Αξία</th>
+                      <th>Απαιτείται Συνταγή</th>
+                      <th>Διαγραφή</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="form-layout mg-t-30 act_tab_main_stock">
+              <h3>Προιόντα</h3>
+              <div class="row">
+                <div class="col-12">
+                  <label for="select_stock">Προιόν:</label>
+                  <select
+                    id="select_stock"
+                    onchange="getStockDetatilsById(this)"
+                    class="gasoum-selector form-control"
+                  >
+                    <option value="0">Επιλογή Προϊόντος...</option>
+                  </select>
+                  <label for="stck_barcode" class="mg-l-10">Barcode:</label>
+                  <input
+                    type="text"
+                    id="stck_barcode"
+                    name="stck_barcode"
+                    onkeydown="stck_barcode_search()"
+                    class="form-control"
+                  />
+                  <label for="select_user_stock" class="mg-l-10"
+                    >Συνεργάτης:</label
+                  >
+                  <select
+                    id="select_user_stock"
+                    onchange="getUserForStock(this)"
+                    class="gasoum-selector form-control"
+                  >
+                    <option value="0">Επιλογή Συνεργάτη...</option>
+                  </select>
+                  <label for="sale_stock_axia" class="mg-l-10">Αξία</label>
+                  <input
+                    type="text"
+                    id="sale_stock_axia"
+                    name="sale_stock_axia"
+                    onchange="change_sale_stock_axia()"
+                    class="form-control"
+                  />
+                  <button
+                    class="btn btn-primary mg-l-10"
+                    id="sale_stock_add"
+                    onclick="
+                      validate_number_stock_sales('sale_stock_axia');
+                      sale_stock_add_to_table();
+                      recalc_sale_stock_total();
+                      sales_update_analysis();
+                    "
+                  >
+                    Προσθήκη Προϊόντος
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-shell mg-t-20">
+                <table
+                  id="salesTableStock"
+                  class="lc-table display responsive nowrap stripe"
+                >
+                  <thead>
+                    <tr>
+                      <th>Stck id</th>
+                      <th>Προιόν</th>
+                      <th>Συνεργάτης id</th>
+                      <th>Συνεργάτης</th>
+                      <th>Αξία</th>
+                      <th>Διαγραφή</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="form-layout mg-t-30 act_tab_main_telika_synola">
+              <h3>Σύνολα</h3>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <label for="sale_tot_service">Σύνολο Υπηρεσιών:</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        id="sale_tot_service"
+                        name="sale_tot_service"
+                        class="form-control"
+                        disabled
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <label for="sale_tot_stck">Σύνολο Προϊόντων:</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        id="sale_tot_stck"
+                        name="sale_tot_stck"
+                        class="form-control"
+                        disabled
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <label for="sale_tot">Γενικό Σύνολο:</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        id="sale_tot"
+                        name="sale_tot"
+                        class="form-control"
+                        disabled
+                      />
+                    </div>
+                  </div>
+
+                  <h4 class="mg-t-20">Είσπραξη</h4>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <label for="sale_eisp_metr">Μετρητά:</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        id="sale_eisp_metr"
+                        name="sale_eisp_metr"
+                        ondblclick="metritat_dbl_click()"
+                        class="form-control"
+                      />
+                      <button class="btn" onclick="metritat_dbl_click()">
+                        <span class="btn-icon-blue"
+                          ><i class="fa fa-bars" aria-hidden="true"></i
+                        ></span>
+                      </button>
+                      <button class="btn" onclick="metritat_ypol_click()">
+                        <span class="btn-icon-red"
+                          ><i class="fa fa-circle-o"></i
+                        ></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <label for="sale_eisp_karta">Κάρτα:</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        id="sale_eisp_karta"
+                        name="sale_eisp_karta"
+                        ondblclick="karta_dbl_click()"
+                        class="form-control"
+                      />
+                      <button class="btn" onclick="karta_dbl_click()">
+                        <span class="btn-icon-blue"
+                          ><i class="fa fa-bars" aria-hidden="true"></i
+                        ></span>
+                      </button>
+                      <button class="btn" onclick="karta_ypol_click()">
+                        <span class="btn-icon-red"
+                          ><i class="fa fa-circle-o"></i
+                        ></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <h4>Ανάλυση</h4>
+                  <textarea
+                    rows="10"
+                    id="sale_analysis"
+                    class="form-control"
+                    placeholder="Ανάλυση"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="row mg-t-20">
+                <div class="col-sm-2">
+                  <button
+                    class="btn btn-primary"
+                    id="sale_new_save"
+                    onclick="sale_update_save(1)"
+                  >
+                    Αποθήκευση
+                  </button>
+                </div>
+                <div class="col-sm-4">
+                  <button
+                    class="btn btn-primary"
+                    id="sale_new_close"
+                    onclick="sale_update_save(0)"
+                  >
+                    Κλείσιμο Καρτέλας
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="br-footer">
+        <div class="footer-left">
+          <div class="mg-b-2">Copyright &copy; 2017. Bracket Plus.</div>
+          <div>All Rights Reserved.</div>
+        </div>
+        <div class="footer-right d-flex align-items-center">
+          <span class="tx-uppercase mg-r-10">Share:</span>
+          <a target="_blank" class="pd-x-5" href="https://www.facebook.com/"><i class="fa fa-facebook-official"></i></a>
+          <a target="_blank" class="pd-x-5" href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/popper.js/popper.js"></script>
+    <script src="../lib/jquery-ui/jquery-ui.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <script src="../lib/jquery-switchbutton/jquery.switchButton.js"></script>
+
+    <script src="../lib/datatables/jquery.dataTables.js"></script>
+    <script src="../lib/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="../lib/select2/js/select2.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="../jsGasoum/randomizer.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/menu_admin.js?ver=591"
+    ></script>
+    <script type="text/javascript" src="../jsGasoum/login.js?ver=591"></script>
+
+    <script type="text/javascript" src="../creds/servers.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/gasoum.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/misc.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/times.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/cus.js?ver=591"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/cusVafi.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/cusHistory.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/sales_update.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/selectize.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/time_out.js?ver=591"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/validation.js?ver=591"
+    ></script>
+
+    <script>
+      credsAppOtherCheck();
+
+      if (typeof menu_constructor === "function") menu_constructor();
+
+      document.addEventListener("click", function (e) {
+        var link = e.target.closest(".br-menu-link");
+        if (!link) return;
+
+        var sub = link.nextElementSibling;
+        if (sub && sub.classList && sub.classList.contains("br-menu-sub")) {
+          e.preventDefault();
+          link.classList.toggle("show-sub");
+          return;
+        }
+      });
+
+      (function () {
+        try {
+          var raw = localStorage.getItem("lcObj");
+          if (!raw) return;
+          var u = JSON.parse(raw);
+          var name = (
+            u && (u.name || u.username) ? String(u.name || u.username) : ""
+          ).trim();
+          var surname = (u && u.surname ? String(u.surname) : "").trim();
+          var full = (name + (surname ? " " + surname : "")).trim();
+          if (!full) return;
+          var el = document.getElementById("lc_user_name");
+          if (el) el.textContent = full;
+        } catch (e) {}
+      })();
+
+      try {
+        document.getElementById("lcMenuMain").classList.add("active");
+      } catch (e) {}
+
+      if (seeCusDetails == 0) {
+        document.getElementById("btn_cus_details").style.visibility = "hidden";
+      }
+      if (seeCusVafi == 0) {
+        document.getElementById("btn_cus_vafes").style.visibility = "hidden";
+      }
+      if (seeCusHistory == 0) {
+        document.getElementById("btn_cus_history").style.visibility = "hidden";
+      }
+
+      document.getElementById("sale_service_requires_vafi").style.visibility =
+        "hidden";
+
+      var current_cus_id = "0";
+      var curr_page = "active_tabs_main";
+
+      insert_tms_active_tabs_new();
+
+      var current_sale_id = saleGetId();
+      console.log("current_sale_id: " + current_sale_id);
+
+      availableCustomers = new Array();
+      const promise1 = add_cus_to_selection_with_promise();
+      const promise2 = promise1.then(
+        getCurrentCusIdAndCurrentSaleVafi,
+        failureCallbackGetCusId("error"),
+      );
+      const promise3 = promise2.then(
+        tab_show_cus_and_basika_stoixeia,
+        failureCallbackGetCusId("error"),
+      );
+      console.log("current_cus_id: " + current_cus_id);
+
+      add_service_to_selection();
+      add_stock_to_selection();
+      add_user_to_selection_for_services();
+      add_user_to_selection_for_stock();
+
+      tab_show_services();
+      tab_show_stck();
+      tab_show_totals();
+
+      $(".fc-datepicker").datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "dd/mm/yy",
+      });
+
+      var sale_current_service_id = 0;
+      var sale_current_service_amount = 0;
+      var sale_service_current_user_id = 0;
+      var sale_current_service_amount_valid = true;
+
+      var sale_service_table_aa = 1;
+      var sale_service_amount_final_sum = 0;
+
+      const salesTableServices = document.getElementById("salesTableServices");
+      const observerServices = new MutationObserver(function (mutationsList) {
+        recalc_sale_service_total();
+        sales_update_analysis();
+      });
+      observerServices.observe(salesTableServices, {
+        childList: true,
+        subtree: true,
+      });
+
+      var sale_current_stock_id = 0;
+      var sale_current_stock_amount = 0;
+      var sale_stock_current_user_id = 0;
+      var sale_current_stock_amount_valid = true;
+
+      var sale_stock_table_aa = 1;
+      var sale_stock_amount_final_sum = 0;
+
+      const salesTableStock = document.getElementById("salesTableStock");
+      const observerStock = new MutationObserver(function (mutationsList) {
+        recalc_sale_stock_total();
+        sales_update_analysis();
+      });
+      observerStock.observe(salesTableStock, {
+        childList: true,
+        subtree: true,
+      });
+
+      tab_show_eisp();
+
+      $(function () {
+        "use strict";
+
+        $(window).resize(function () {
+          minimizeMenu();
+        });
+
+        minimizeMenu();
+
+        function minimizeMenu() {
+          if (
+            window.matchMedia("(min-width: 992px)").matches &&
+            window.matchMedia("(max-width: 1299px)").matches
+          ) {
+            $(".menu-item-label,.menu-item-arrow").addClass(
+              "op-lg-0-force d-lg-none",
+            );
+            $("body").addClass("collapsed-menu");
+            $(".show-sub + .br-menu-sub").slideUp();
+          } else if (
+            window.matchMedia("(min-width: 1300px)").matches &&
+            !$("body").hasClass("collapsed-menu")
+          ) {
+            $(".menu-item-label,.menu-item-arrow").removeClass(
+              "op-lg-0-force d-lg-none",
+            );
+            $("body").removeClass("collapsed-menu");
+            $(".show-sub + .br-menu-sub").slideDown();
+          }
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+        const body = document.body;
+
+        if (menuToggle) {
+          menuToggle.addEventListener("click", function () {
+            body.classList.toggle("collapsed-menu");
+          });
+        }
+
+        if (mobileMenuToggle) {
+          mobileMenuToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            body.classList.add("show-sidebar");
+          });
+        }
+
+        if (sidebarOverlay) {
+          sidebarOverlay.addEventListener("click", function () {
+            body.classList.remove("show-sidebar");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

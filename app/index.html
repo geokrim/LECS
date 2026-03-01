@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <meta name="description" content="LECS. Premium Saloon Software" />
+    <meta name="author" content="LECS Softare" />
+    <title>LECS login</title>
+    <link rel="icon" type="image/png" href="../img/lc_icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../cssGasoum/base.css?v=3" />
+    <link rel="stylesheet" href="../cssGasoum/components.css?v=1003" />
+
+    <link rel="stylesheet" href="../cssGasoum/index.css?v=1" />
+
+    <script
+      type="text/javascript"
+      src="../jsGasoum/randomizer.js?ver=591"
+    ></script>
+    <script type="text/javascript" src="../jsGasoum/login.js?ver=591"></script>
+    <script type="text/javascript" src="../creds/servers.js?ver=591"></script>
+    <script type="text/javascript" src="../jsGasoum/ios.js?ver=591"></script>
+    <script
+      type="text/javascript"
+      src="../jsGasoum/error_logs.js?ver=591"
+    ></script>
+  </head>
+  <body>
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="login-logo__wordmark"><span>[</span>LECS<span>]</span></div>
+      </div>
+      <div ondblclick="clearLoginForm()" class="login-tagline">
+        The App For Saloon Specialists
+      </div>
+
+      <div class="login-divider"></div>
+
+      <div class="login-form-group">
+        <label for="globalId">Εταιρικός Κωδικός</label>
+        <span class="input-icon"><i class="ion-briefcase"></i></span>
+        <input
+          type="text"
+          class="form-control"
+          id="globalId"
+          placeholder="Εταιρικός Κωδικός"
+        />
+      </div>
+
+      <div class="login-form-group">
+        <label for="username">Username</label>
+        <span class="input-icon"><i class="ion-person"></i></span>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          placeholder="Username"
+        />
+      </div>
+
+      <div class="login-form-group">
+        <label for="password">Password</label>
+        <span class="input-icon"><i class="ion-locked"></i></span>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+        />
+      </div>
+
+      <button
+        type="submit"
+        id="btnLogin"
+        onclick="executeCredsLoginCheck()"
+        class="btn-signin"
+      >
+        <i class="ion-log-in"></i>
+        Sign In
+      </button>
+    </div>
+
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/popper.js/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <script>
+      var curr_ip_egatastasis = "";
+      $.getJSON(
+        "https://api.ipify.org?format=jsonp&callback=?",
+        function (json) {
+          curr_ip_egatastasis = json.ip;
+        },
+      );
+
+      var isIOS = check_if_ios();
+
+      var current_globalId = "";
+      var current_username = "";
+      var current_password = "";
+      var loginServerURL = "";
+
+      var password_input = document.getElementById("password");
+      password_input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("btnLogin").click();
+        }
+      });
+
+      $(document).ready(function () {
+        loadLustLoggedInUser();
+      });
+    </script>
+
+  </body>
+</html>
