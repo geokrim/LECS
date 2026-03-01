@@ -54,32 +54,3 @@ Moment.jsDate -> parsing, formatting, and manipulation
 npm -> Dependency management 
 Grunt -> Task automation (compilation, minification, watch) 
 Bower -> Frontend package resolution 
-
-
-## Architecture Overview
-lecs/
-├── app/                  # Core application modules (routing, views, controllers)
-│   ├── customers/        # CRM module
-│   ├── financials/       # Cash flow and expense tracking
-│   ├── inventory/        # Stock management
-│   ├── marketing/        # SMS campaigns and messaging
-│   ├── scheduling/       # Appointments and calendar
-│   └── analytics/        # Reporting and chart views
-│
-├── jsGasoum/             # Custom business logic and domain-specific utilities
-│
-├── lib/                  # Third-party vendor libraries (Bower-managed)
-│
-├── scss/                 # Sass source files
-│   ├── base/             # Global resets, variables, and typography
-│   ├── components/       # Reusable UI component styles
-│   └── modules/          # Feature-specific stylesheets
-│
-├── Gruntfile.js          # Build task configuration
-├── package.json          # npm manifest
-└── bower.json            # Frontend dependency manifest
-
-app/ -> houses all feature modules, each encapsulating its own views and logic for clean separation.
-jsGasoum/ -> contains domain-specific business logic and helpers tailored to salon operations.
-lib/ -> is the vendor directory managed by Bower, keeping third-party code isolated from application source. 
-scss/ -> is organized to reflect a scalable ITCSS-inspired architecture with clearly scoped partials.
